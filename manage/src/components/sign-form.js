@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import TextInput from './text-input';
-import SingleCheckbox from './single-checkbox';
-import MultiCheckbox from './multi-checkbox';
-import ImageInput from './image-input';
-import './sign-form.css';
+import BaseForm from './base-form';
+import './inputs.css';
 
 class SignForm extends Component {
   constructor(props) {
@@ -14,9 +10,10 @@ class SignForm extends Component {
       {
         id: 0,
         inputName: 'phone_number',
-        label: '手机:',
+        label: '手机',
         type: 'text',
         value: '',
+        placeholder: '1xxxxxxxxxx',
         validator: (value) => /^1[0-9]{10}$/.test(value),
         trans: (value) => value,
         error: '格式不正确'
@@ -24,9 +21,10 @@ class SignForm extends Component {
       {
         id: 1,
         inputName: 'email',
-        label: '邮箱:',
+        label: '邮箱',
         type: 'text',
         value: '',
+        placeholder: 'youpai@hustunique.com',
         validator: (value) => /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/.test(value),
         trans: (value) => value,
         error: '格式不正确'
@@ -34,9 +32,10 @@ class SignForm extends Component {
       {
         id: 2,
         inputName: 'name',
-        label: '名字:',
+        label: '姓名',
         type: 'text',
         value: '',
+        placeholder: '友拍',
         validator: isNotEmpty,
         trans: (value) => value,
         error: '不可为空'
@@ -44,9 +43,10 @@ class SignForm extends Component {
       {
         id: 3,
         inputName: 'description',
-        label: '个人简介:',
+        label: '简介',
         type: 'text',
         value: '',
+        placeholder: '',
         validator: isNotEmpty,
         trans: (value) => value,
         error: '不可为空'
@@ -54,9 +54,10 @@ class SignForm extends Component {
       {
         id: 4,
         inputName: 'major',
-        label: '专业:',
+        label: '专业',
         type: 'text',
         value: '',
+        placeholder: '软件工程',
         validator: isNotEmpty,
         trans: (value) => value,
         error: '不可为空'
@@ -64,9 +65,10 @@ class SignForm extends Component {
       {
         id: 5,
         inputName: 'imagelink',
-        label: '图集链接:',
+        label: '图集',
         type: 'text',
         value: '',
+        placeholder: 'http://www.hustunique.com',
         validator: isNotEmpty,
         trans: (value) => value,
         error: '不可为空'
@@ -74,9 +76,10 @@ class SignForm extends Component {
       {
         id: 6,
         inputName: 'tag',
-        label: '个人标签（以\'/\'隔开）:',
+        label: '标签',
         type: 'text',
         value: '',
+        placeholder: '好人/超级好人/约拍500',
         validator: (value) => value.split('/').reduce((acc, val) => {
           return acc && isNotEmpty(val);
         }, true),
@@ -86,9 +89,10 @@ class SignForm extends Component {
       {
         id: 7,
         inputName: 'sex',
-        label: '性别:',
-        type: 'SingleCheckbox',
+        label: '性别',
+        type: 'single-checkbox',
         value: '1',
+        placeholder: '',
         values: [
           {
             label: '男',
@@ -105,9 +109,10 @@ class SignForm extends Component {
       {
         id: 8,
         inputName: 'styles',
-        label: '风格:',
-        type: 'MultiCheckbox',
+        label: '风格',
+        type: 'multi-checkbox',
         value: [],
+        placeholder: '',
         values: [
           //TODO: use /api/blablabla/option to get info
           {
@@ -127,9 +132,10 @@ class SignForm extends Component {
       {
         id: 9,
         inputName: 'categories',
-        label: '类目:',
-        type: 'MultiCheckbox',
+        label: '类目',
+        type: 'multi-checkbox',
         value: [],
+        placeholder: '',
         values: [
           //TODO: use /api/blablabla/option to get info
           {
@@ -149,106 +155,29 @@ class SignForm extends Component {
       {
         id: 10,
         inputName: 'images',
-        label: '作品:',
-        type: 'ImageInput',
+        label: '作品',
+        type: 'image-input',
         value: [],
+        placeholder: '',
         validator: (value) => value.length > 0,
         trans: (value) => value,
         error: '不可为空'
       },
     ];
-    this.state = this.formConfig.reduce((acc, val) => {
-      acc[val.inputName] = val.value;
-      return acc;
-    }, {});
-    this.handleFormChange = this.handleFormChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  handleFormChange(state) {
-    this.setState(state);
-  }
-  handleSubmit(e) {
-    e.preventDefault();
-    const valid = this.formConfig.reduce((acc, val) => {
-      return acc && val.validator(this.state[val.inputName]);
-    }, true);
-    //TODO: let user know it's valid or not
-    // console.log(valid);
-    if(valid) {
-      const form = this.formConfig.reduce((acc, val) => {
-        acc[val.inputName] = val.trans(this.state[val.inputName]);
-        return acc;
-      }, {});
-      axios({
-        method: 'post',
-        url: '/api/register',
-        data: form
-      }).then((res) => {
-        //TODO: do something
-        // console.log(res);
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
-    }
   }
   render() {
-    let formList = this.formConfig.map((form) => {
-      switch (form.type) {
-        case 'text':
-          return (
-            <TextInput
-              key={form.id}
-              validator={form.validator}
-              inputName={form.inputName}
-              value={this.state[form.inputName]}
-              label={form.label}
-              onValueUpdate={this.handleFormChange}
-            />
-          );
-        case 'SingleCheckbox':
-          return (
-            <SingleCheckbox
-              key={form.id}
-              inputName={form.inputName}
-              values={form.values}
-              value={this.state[form.inputName]}
-              onValueUpdate={this.handleFormChange}
-            />
-          );
-        case 'MultiCheckbox':
-          return (
-            <MultiCheckbox
-              key={form.id}
-              inputName={form.inputName}
-              values={form.values}
-              value={this.state[form.inputName]}
-              onValueUpdate={this.handleFormChange}
-            />
-          );
-        case 'ImageInput':
-          return (
-            <ImageInput
-              key={form.id}
-              inputName={form.inputName}
-              value={this.state[form.inputName]}
-              onValueUpdate={this.handleFormChange}
-            />
-          );
-        default:
-          return (
-            <div
-              key={form.id}
-            >Unexpected type</div>
-          );
-      }
-    });
     return (
       <div className="sign-form">
-        <form onSubmit={this.handleSubmit}>
-          {formList}
-          <input type="submit"/>
-        </form>
+        <BaseForm
+          formConfig={this.formConfig}
+          request={{
+            url: '/api/profile',
+            method: 'patch',
+            name: '修改',
+            then: (res) => console.log(res),
+            error: (err) => console.log(err)
+          }}
+        />
       </div>
     );
   }

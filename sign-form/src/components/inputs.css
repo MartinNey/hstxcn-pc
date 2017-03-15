@@ -47,7 +47,6 @@ input[type=text], input[type=password] {
 .text-input label {
   position: absolute;
   font-size: .8rem;
-  border: 1px solid rgba(0, 0, 0, 0);
   padding: .8rem 0;
   left: .8rem;
   color: #aaa;

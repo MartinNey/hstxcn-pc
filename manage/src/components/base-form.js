@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import TextInput from './text-input';
 import PasswordInput from './password-input';
+import SingleCheckbox from './single-checkbox';
+import MultiCheckbox from './multi-checkbox';
+import ImageInput from './image-input';
 import './inputs.css';
 
 class BaseForm extends Component {
@@ -117,6 +120,30 @@ class BaseForm extends Component {
         case 'password':
           return (
             <PasswordInput
+              {...props}
+              key={form.id}
+              value={this.state[form.inputName]}
+              onValueUpdate={this.handleFormChange}
+            />);
+        case 'single-checkbox':
+          return (
+            <SingleCheckbox
+              {...props}
+              key={form.id}
+              value={this.state[form.inputName]}
+              onValueUpdate={this.handleFormChange}
+            />);
+        case 'multi-checkbox':
+          return (
+            <MultiCheckbox
+              {...props}
+              key={form.id}
+              value={this.state[form.inputName]}
+              onValueUpdate={this.handleFormChange}
+            />);
+        case 'image-input':
+          return (
+            <ImageInput
               {...props}
               key={form.id}
               value={this.state[form.inputName]}
