@@ -16,9 +16,6 @@
         }
     },
     "rules": {
-        "react/prop-types": [
-          0
-        ],
         "no-console": [
           "error",
           {

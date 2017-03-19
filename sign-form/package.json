@@ -2,6 +2,7 @@
   "name": "hstxcn-pc-sign-form",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://yp.smaroad.com/login",
   "devDependencies": {
     "axios": "^0.15.3",
     "eslint": "^3.17.1",

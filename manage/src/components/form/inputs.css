@@ -39,8 +39,8 @@ input[type=text], input[type=password] {
   padding: .8rem .8rem .8rem 3rem;
 }
 .text-input {
-  width: 80%;
-  margin: .6rem auto;
+  width: 300px;
+  margin: .6rem;
   display: inline-block;
   position: relative;
 }

@@ -39,7 +39,12 @@ class SignIn extends Component {
             url: '/api/login',
             method: 'post',
             name: '登录',
-            then: (res) => console.log(res),
+            then: (res) => {
+              if (res.status === 200) {
+                document.cookie = 'auth=' + res.data.auth;
+                window.location.href = '/manage';
+              }
+            },
             error: (err) => console.log(err)
           }}
         />
