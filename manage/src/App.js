@@ -45,6 +45,10 @@ class App extends Component {
     const {id, status, collection, ...other} = rowData;
     const profile = {
       status: status || 'reviewed',
+      tags: {
+        readOnly: false,
+        value: []
+      },
       id: id,
     };
     for (let props in {...other}) {
@@ -52,7 +56,11 @@ class App extends Component {
         value: null,
         readOnly: false,
       };
-      profile[props].value = {...other}[props];
+      if (props === 'tags') {
+        profile[props].value = {...other}[props].map((value) => value.text);
+      } else {
+        profile[props].value = {...other}[props];
+      }
       profile[props].readOnly = (props === 'name' || props === 'likes');
     }
     axios({

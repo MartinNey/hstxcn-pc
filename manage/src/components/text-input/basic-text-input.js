@@ -41,7 +41,7 @@ class BasicTextInput extends Component {
                  onBlur={() => {
                    this.setState({
                      isFocused: false
-                   })
+                   });
                  }}
                  onChange={(e) => this.handleChange(e.target.value)}
                  name={this.props.inputName}
@@ -50,5 +50,16 @@ class BasicTextInput extends Component {
     );
   }
 }
+
+BasicTextInput.propTypes = {
+  type: React.PropTypes.string,
+  input: React.PropTypes.string,
+  inputName: React.PropTypes.string,
+  placeholder: React.PropTypes.string,
+  value: React.PropTypes.string,
+  label: React.PropTypes.string,
+  validator: React.PropTypes.func,
+  onValueUpdate: React.PropTypes.func,
+};
 
 export default BasicTextInput;

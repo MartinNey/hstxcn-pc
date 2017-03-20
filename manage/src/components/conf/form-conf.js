@@ -79,16 +79,13 @@ const FORM_CONFIG = [
   },
   {
     id: 6,
-    inputName: 'tag',
+    inputName: 'tags',
     label: '标签',
     type: 'tag',
-    value: '',
-    placeholder: '好人/超级好人/约拍500',
-    validator: (value) => value.reduce((acc, val) => {
-      // return acc && isNotEmpty(val.text);
-      return acc && true;
-    }, true),
-    trans: (value) => value.split('/'),
+    value: [],
+    placeholder: '新标签',
+    validator: (value) => {console.log(value); return true},
+    trans: (value) => value,
     error: '格式不正确'
   },
   {

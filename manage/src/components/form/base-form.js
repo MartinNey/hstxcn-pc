@@ -5,6 +5,7 @@ import PasswordInput from '../text-input/password-input';
 import SingleCheckbox from '../select-input/single-checkbox';
 import MultiCheckbox from '../select-input/multi-checkbox';
 import ImageInput from '../collections/image-input';
+import Tag from '../tags/tag';
 import './inputs.css';
 
 class BaseForm extends Component {
@@ -12,7 +13,7 @@ class BaseForm extends Component {
     super(props);
     this.state = this.props.formConfig.reduce((acc, val) => {
       acc[val.inputName] = this.props.formValue[val.inputName] || {
-        value: null,
+        value: val.value,
         readOnly: false,
       };
       return acc;
@@ -63,7 +64,7 @@ class BaseForm extends Component {
       const msg = data[0]['error'] || '';
       this.setState({
         msg: {
-          type: 'error',
+
           content: msg
         }
       });
@@ -131,6 +132,15 @@ class BaseForm extends Component {
       case 'multi-checkbox':
         return (
           <MultiCheckbox
+            {...props}
+            key={form.id}
+            value={this.state[form.inputName].value}
+            readOnly={this.state[form.inputName].readOnly}
+            onValueUpdate={this.handleFormChange}
+          />);
+      case 'tag':
+        return (
+          <Tag
             {...props}
             key={form.id}
             value={this.state[form.inputName].value}
