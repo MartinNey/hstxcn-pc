@@ -32,7 +32,9 @@ class BaseForm extends Component {
   }
   transToForm() {
     return this.props.formConfig.reduce((acc, val) => {
-      acc[val.inputName] = val.trans(this.state[val.inputName]);
+      if (!this.state[val.inputName].readOnly) {
+        acc[val.inputName] = val.trans(this.state[val.inputName].value);
+      }
       return acc;
     }, {});
   }
@@ -64,7 +66,6 @@ class BaseForm extends Component {
       const msg = data[0]['error'] || '';
       this.setState({
         msg: {
-
           content: msg
         }
       });
@@ -100,7 +101,7 @@ class BaseForm extends Component {
   render() {
     let formList = this.props.formConfig.map((form) => {
       /* eslint no-unused-vars: "off" */
-      const {id, ...props} = form;
+      const {id, values, ...props} = form;
       switch (form.type) {
       case 'text':
         return (
@@ -126,6 +127,7 @@ class BaseForm extends Component {
             {...props}
             key={form.id}
             value={this.state[form.inputName].value}
+            values={this.props.options[form.inputName] || values}
             readOnly={this.state[form.inputName].readOnly}
             onValueUpdate={this.handleFormChange}
           />);
@@ -135,6 +137,7 @@ class BaseForm extends Component {
             {...props}
             key={form.id}
             value={this.state[form.inputName].value}
+            values={this.props.options[form.inputName] || values}
             readOnly={this.state[form.inputName].readOnly}
             onValueUpdate={this.handleFormChange}
           />);
@@ -184,6 +187,7 @@ BaseForm.propTypes = {
   formConfig: React.PropTypes.array,
   formValue: React.PropTypes.object,
   request: React.PropTypes.object,
+  options: React.PropTypes.object,
   auth: React.PropTypes.string
 };
 

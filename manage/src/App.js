@@ -19,10 +19,17 @@ class App extends Component {
       profile: {
         status: null,
       },
+      collections: null,
+      options: null
     };
+    this.loadProfile = this.loadProfile.bind(this);
+    this.loadOptions = this.loadOptions.bind(this);
+    this.loadCollections = this.loadCollections.bind(this);
   }
   componentWillMount() {
     this.loadProfile();
+    this.loadOptions();
+    this.loadCollections();
   }
   loadProfile() {
     axios({
@@ -32,14 +39,14 @@ class App extends Component {
       },
       method: 'get'
     }).then((res) => {
-      this.profileParser(res.data);
+      this.setState({
+        profile: App.profileParser(res.data)
+      });
     }).catch((err) => {
-        //go to login page
-        // window.location = '/login';
-        // console.log(err);
+      //TODO: error handler
     });
   }
-  profileParser(rowData) {
+  static profileParser(rowData) {
     // as I just need to remove collection var from rowData
     /*eslint no-unused-vars: off*/
     const {id, status, collection, ...other} = rowData;
@@ -52,17 +59,41 @@ class App extends Component {
       id: id,
     };
     for (let props in {...other}) {
-      profile[props] = {
-        value: null,
-        readOnly: false,
-      };
-      if (props === 'tags') {
-        profile[props].value = {...other}[props].map((value) => value.text);
-      } else {
-        profile[props].value = {...other}[props];
+      if ({...other}.hasOwnProperty(props)) {
+        profile[props] = {
+          value: null,
+          readOnly: false,
+        };
+        if (props === 'tags') {
+          profile[props].value = {...other}[props].map((value) => value.text);
+        } else {
+          profile[props].value = {...other}[props];
+        }
+        profile[props].readOnly = (
+          // readonly is true while
+          !['reviewed', 'admin'].includes(profile.status) ||
+          ['name', 'email', 'likes'].includes(props)
+        );
       }
-      profile[props].readOnly = (props === 'name' || props === 'likes');
     }
+    return profile;
+  }
+  loadOptions() {
+    axios({
+      url: '/api/photographer/option',
+      headers: {
+        Authorization: this.state.auth,
+      },
+      method: 'get'
+    }).then((res) => {
+      this.setState({
+        options: res.data
+      });
+    }).catch((err) => {
+      return err.data;
+    });
+  }
+  loadCollections() {
     axios({
       url: '/api/user/collection',
       headers: {
@@ -70,43 +101,29 @@ class App extends Component {
       },
       method: 'get'
     }).then((res) => {
-      profile['collection'] = {
-        value: res.data,
-        readOnly: false
-      };
       this.setState({
-        profile: profile
+        collections: res.data
       });
     }).catch((err) => {
-      // this.setState({
-      //   profile: profile
-      // });
-      //maybe try again??
+      // TODO: error handler
     });
-
-    // {"id": "2487bf181a004b1c8a8ad7c982ddc72b",
-    //   "name": "su",
-    //   "likes": 0,
-    //   "imagelink": null,
-    //   "major": null,
-    //   "number": 0,
-    //   "sex": true,
-    //   "description": "1",
-    //   "tags": [],
-    //   "email": "youpaihust@163.com",
-    //   "status": "admin",
-    //   collection": null}
-
-    // this.setState({
-    //   profile: res.data
-    // });
   }
   render() {
-    const profileForm = () => (
+    const adminProfiles = () => (
       <ProfileForm
         profile={this.state.profile || {}}
         auth={this.state.auth}
       />
+    );
+    const profileForm = () => (
+      <ProfileForm
+        profile={this.state.profile || {}}
+        options={this.state.options || {}}
+        auth={this.state.auth}
+      />
+    );
+    const collections = () => (
+      <div>collections</div>
     );
     const admin = () => {
       if (this.state.profile.status !== 'admin') {
@@ -135,18 +152,22 @@ class App extends Component {
                 this.state.profile.status === 'admin' ?
                 (<div>
                   <Link to="/admin">首页</Link>
-                  <Link to="/profile/">账号</Link>
+                  <Link to="/admin/profiles">账号</Link>
                 </div>):
                 (<div>
                   <Link to="/profile">账号管理</Link>
+                  <Link to="/collections">图集管理</Link>
                   <Link to="/change-password">更改密码</Link>
                 </div>)
               }
             </h2>
           </nav>
+          <Route path="/admin" component={admin}>
+            <Route path="/profiles/:id" component={adminProfiles}/>
+          </Route>
           <Route path="/profile" component={profileForm} />
-          <Route path="/profile/:id" component={profileForm} />
-          <Route path="/admin" component={admin} />
+          <Route path="/collections" component={collections} />
+          {/*<Route path="/profile/:id" component={profileForm} />*/}
         </div>
       </Router>
     );

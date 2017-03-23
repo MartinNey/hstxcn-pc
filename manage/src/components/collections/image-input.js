@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ImagePreview from './image-preview'
+import ImagePreview from './image-preview';
 import './image-input.css';
 
 class ImageInput extends Component {

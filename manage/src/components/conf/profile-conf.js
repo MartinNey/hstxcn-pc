@@ -89,20 +89,32 @@ const FORM_CONFIG = [
     error: '格式不正确'
   },
   {
+    id: 10,
+    inputName: 'schools',
+    label: '学校',
+    type: 'single-checkbox',
+    value: null,
+    values: [],
+    placeholder: '',
+    validator: (value) => true,
+    trans: (value) => value,
+    error: '选择一项学校'
+  },
+  {
     id: 7,
     inputName: 'sex',
     label: '性别',
     type: 'single-checkbox',
-    value: '1',
+    value: true,
     placeholder: '',
     values: [
       {
-        label: '男',
-        value: '1'
+        name: '男',
+        id: true
       },
       {
-        label: '女',
-        value: '0'
+        name: '女',
+        id: false
       }
     ],
     validator: (value) => true,
@@ -114,19 +126,8 @@ const FORM_CONFIG = [
     label: '风格',
     type: 'multi-checkbox',
     value: [],
+    values: [],
     placeholder: '',
-    values: [
-      //TODO: use /api/blablabla/option to get info
-      {
-        label: '测试',
-        value: 'uuid'
-      },
-      {
-        label: '又一个测试',
-        value: 'uuid222'
-      }
-    ],
-    // validator: (value) => value.length > 0,
     validator: (value) => true,
     trans: (value) => value,
     error: '至少选择一项'
@@ -137,33 +138,11 @@ const FORM_CONFIG = [
     label: '类目',
     type: 'multi-checkbox',
     value: [],
+    values: [],
     placeholder: '',
-    values: [
-      //TODO: use /api/blablabla/option to get info
-      {
-        label: '测试',
-        value: 'uuid'
-      },
-      {
-        label: '又一个测试',
-        value: 'uuid222'
-      }
-    ],
-    // validator: (value) => value.length > 0,
     validator: (value) => true,
     trans: (value) => value,
     error: '至少选择一项'
-  },
-  {
-    id: 10,
-    inputName: 'collection',
-    label: '作品',
-    type: 'collection',
-    value: [],
-    placeholder: '',
-    validator: (value) => value.length > 0,
-    trans: (value) => value,
-    error: '图片不可为空'
   },
 ];
 

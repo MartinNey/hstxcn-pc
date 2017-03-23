@@ -14,7 +14,10 @@ class BasicTextInput extends Component {
 
   handleChange(value) {
     this.props.onValueUpdate({
-      [this.props.inputName]: value
+      [this.props.inputName]: {
+        readOnly: this.props.readOnly,
+        value: value
+      }
     });
   }
   makeClassName() {
@@ -56,7 +59,10 @@ BasicTextInput.propTypes = {
   input: React.PropTypes.string,
   inputName: React.PropTypes.string,
   placeholder: React.PropTypes.string,
-  value: React.PropTypes.string,
+  readOnly: React.PropTypes.bool,
+  value: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.number]),
   label: React.PropTypes.string,
   validator: React.PropTypes.func,
   onValueUpdate: React.PropTypes.func,
