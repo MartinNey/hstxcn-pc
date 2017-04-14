@@ -237,7 +237,7 @@ class App extends Component {
       },
     ];
     return (
-      <Router history={browserHistory}>
+      <Router history={browserHistory} basename="/manage">
         <div className="app">
           <nav>
             <img src={logo} className="app-logo" alt="logo" />
