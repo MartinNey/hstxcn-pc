@@ -71,10 +71,9 @@ input[type=text], input[type=password] {
   padding: .8rem;
   width: 80%;
   color: #f7fafc;
-}
-.base-form-message.ok {
   display: none;
 }
 .base-form-message.error {
+  display: block;
   background-color: #CD314E;
 }

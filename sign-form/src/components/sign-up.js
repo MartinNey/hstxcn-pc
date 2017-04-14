@@ -52,7 +52,12 @@ class SignUp extends Component {
             url: '/api/register',
             name: '注册',
             method: 'post',
-            then: (res) => console.log(res),
+            then: (res) => {
+              if (res.status === 201) {
+                document.cookie = 'auth=' + res.data.auth + ', path=/manage';
+                window.location.href = '/manage';
+              }
+            },
             error: (err) => console.log(err)
           }}
         />
