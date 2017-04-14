@@ -54,7 +54,7 @@ class SignUp extends Component {
             method: 'post',
             then: (res) => {
               if (res.status === 201) {
-                document.cookie = 'auth=' + res.data.auth + ', path=/manage';
+                document.cookie = 'auth=' + res.data.auth + '; path=/manage';
                 window.location.href = '/manage';
               }
             },

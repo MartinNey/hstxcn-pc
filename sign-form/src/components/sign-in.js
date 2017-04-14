@@ -41,7 +41,7 @@ class SignIn extends Component {
             name: '登录',
             then: (res) => {
               if (res.status === 200) {
-                document.cookie = 'auth=' + res.data.auth + ', path=/manage';
+                document.cookie = 'auth=' + res.data.auth + '; path=/manage';
                 window.location.href = '/manage';
               }
             },

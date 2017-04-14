@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "http://yp.smaroad.com/login",
+  "proxy": "http://localhost:8000",
   "devDependencies": {
     "axios": "^0.15.3",
     "eslint": "^3.17.1",
