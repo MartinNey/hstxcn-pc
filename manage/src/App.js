@@ -54,7 +54,9 @@ class App extends Component {
       });
     }).catch((err) => {
       Alert.error('登录失败，即将跳转至登录页面');
-      //TODO: error handler
+      setTimeout(() => {
+        window.location.href = '/login';
+      }, 3000);
     });
   }
   static profileParser(rowData) {
