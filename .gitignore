@@ -53,7 +53,7 @@ coverage
 build/Release
 
 # output
-build
+# build
 
 # Dependency directories
 node_modules
