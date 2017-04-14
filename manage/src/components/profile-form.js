@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
+import Alert from 'react-s-alert';
 import BaseForm from './form/base-form';
 import FORM_CONFIG from './conf/profile-conf';
 import './form/inputs.css';
@@ -18,9 +18,12 @@ class ProfileForm extends Component {
             method: 'patch',
             name: '修改',
             then: (res) => {
+              Alert.info('修改成功！');
+              this.props.onUpdate();
               //console.log(res);
             },
             error: (err) => {
+              this.props.onError(err);
               //console.log(err)
             }
           }}
@@ -31,8 +34,11 @@ class ProfileForm extends Component {
 }
 ProfileForm.propTypes = {
   auth: React.PropTypes.string,
+  history: React.PropTypes.object,
   profile: React.PropTypes.object,
-  options: React.PropTypes.object
+  options: React.PropTypes.object,
+  onUpdate: React.PropTypes.func,
+  onError: React.PropTypes.func
 };
 
 export default ProfileForm;

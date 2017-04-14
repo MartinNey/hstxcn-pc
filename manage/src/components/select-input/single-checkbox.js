@@ -18,18 +18,20 @@ class SingleCheckbox extends Component {
   render() {
     const inputs = this.props.values.map((value) => {
       return (
-        <div
+        <li
           key={value.id}
           onClick={(e) => this.handleClick(value.id)}
-          className={'checkbox-' + (this.props.value === value.id)}>
+          className={'checkbox-' + (this.props.value.value === value.id)}>
           {value.name}
-        </div>
+        </li>
       );
     });
     return (
-      <div className={'single-checkbox '+this.props.inputName}>
-        <p className='label'>{this.props.label}</p>
-        {inputs}
+      <div className={'checkbox '+this.props.inputName}>
+        <label>{this.props.label}</label>
+        <ul>
+          {inputs}
+        </ul>
       </div>
     );
   }

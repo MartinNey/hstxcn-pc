@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>验证邮箱</title>
+  </head>
+  <body>
+    <div id="info">
+      邮箱验证中...
+    </div>
+  </body>
+  <script charset="utf-8">
+//    console.log(window.location.pathname);
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("info").innerHTML = '邮箱验证成功，即将跳转至管理页面';
+        setTimeout(() => {
+          window.location.href = '/manage';
+        }, 3000);
+      }
+    };
+    var path = 'api' + window.location.pathname;
+    xhttp.open("POST", path, true);
+    xhttp.send();
+  </script>
+</html>

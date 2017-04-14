@@ -5,37 +5,44 @@ class MultiCheckbox extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.containValue = this.containValue.bind(this);
   }
-  handleClick(id) {
-    let value = this.props.value;
-    const theIndex = value.indexOf(id);
+  handleClick(value) {
+    let propValue = this.props.value;
+    const theIndex = this.props.value.findIndex((each) => each.id === value.id);
     if (theIndex > -1) {
-      value.splice(theIndex, 1);
+      propValue.splice(theIndex, 1);
     } else {
-      value.push(id);
+      propValue.push(value);
     }
     this.props.onValueUpdate({
       [this.props.inputName]: {
         readOnly: this.props.readOnly,
-        value: value
+        value: propValue
       }
     });
+  }
+  containValue(id) {
+    const idList = this.props.value.map((value) => value.id);
+    return idList.includes(id);
   }
   render() {
     const inputs = this.props.values.map((value) => {
       return (
-        <div
+        <li
           key={value.id}
-          onClick={(e) => this.handleClick(value.id)}
-          className={'checkbox-' + (this.props.value.includes(value.id))}>
+          onClick={(e) => this.handleClick(value)}
+          className={'checkbox-' + (this.containValue(value.id))}>
           {value.name}
-        </div>
+        </li>
       );
     });
     return (
-      <div className={'multi-checkbox '+this.props.inputName}>
-        <p className='label'>{this.props.label}</p>
-        {inputs}
+      <div className={'checkbox '+this.props.inputName}>
+        <label>{this.props.label}</label>
+        <ul>
+          {inputs}
+        </ul>
       </div>
     );
   }

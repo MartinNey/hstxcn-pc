@@ -1,80 +1,233 @@
-input[type=text], input[type=password], input[type=submit], .base-form-message {
-  width: 100%;
-  font-size: .8rem;
-  color: #555;
-  vertical-align: baseline;
-  transition: .1s all linear;
-  border: .1rem solid rgba(0, 0, 0, .12);
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-  background-color: #fff;
-  box-sizing: border-box;
-}
-button, input, select, textarea {
-  font-family: inherit;
-  font-size: 100%;
-  vertical-align: baseline;
-  border: 0;
-  outline: 0;
-}
-button::-moz-focus-inner, input::-moz-focus-inner {
-  border: 0;
-  padding: 0;
-}
-input[type=submit] {
-  margin-top: 3rem;
-  padding: .8rem;
-  cursor: pointer;
-  width: 80%;
-}
-input[type=submit]:hover {
-  background-color: #fafafa;
-}
-input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 300px #fff inset;
-  -webkit-text-fill-color: #555;
-}
-input[type=text], input[type=password] {
-  padding: .8rem .8rem .8rem 3rem;
-}
-.text-input {
-  width: 300px;
-  margin: .6rem;
-  display: inline-block;
+.text-input,
+.checkbox,
+.tags {
   position: relative;
+  margin: 1em 1em 1em 7em;
 }
-.text-input label {
+
+.text-input input,
+.text-input textarea {
+  background: none;
+  box-sizing: border-box;
+  font-size: 14px;
+  padding: .7em .7em .7em .35em;
+  display: inline-block;
+  width: 300px;
+  border: none;
+}
+.text-input input {
+  border-bottom: 1px solid rgba(0, 0, 0, 0);
+}
+.text-input textarea {
+  height: 6em;
+  border: 2px solid rgba(0, 0, 0, .14);
+  transition: all .2s;
+  resize: none;
+}
+.text-input input.not-readonly {
+  border-bottom: 1px solid rgba(0, 0, 0, .14);
+}
+
+.text-input input.not-readonly:focus,
+.text-input textarea.not-readonly:focus {
+  outline: none;
+}
+
+.text-input label,
+.checkbox label,
+.tags label {
   position: absolute;
-  font-size: .8rem;
-  padding: .8rem 0;
-  left: .8rem;
-  color: #aaa;
-  transition: .1s all linear;
-  cursor: text;
+  display: inline-block;
+  font-weight: normal;
+  pointer-events: none;
+  left: -6em;
+  top: .85em;
+  font-size: 14px;
+  color: #5264AE;
 }
-.text-input.focused input {
-  padding-left: 2.5rem;
+
+
+/* BOTTOM BARS ================================= */
+
+.text-input-bar {
+  position: relative;
+  display: block;
+  width: 300px;
 }
-.text-input.focused label {
-  left: .3rem;
-  opacity: .5;
+
+.text-input-bar:before,
+.text-input-bar:after {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 0;
+  position: absolute;
+  background: #5264AE;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
 }
-.text-input.touched.invalid input{
-  border-color: #CD314E;
+
+.text-input-bar:before {
+  left: 50%;
 }
-.text-input.touched.valid input{
-  border-color: rgba(0, 0, 0, 0.12);
+
+.text-input-bar:after {
+  right: 50%;
+}
+
+
+/* active state */
+
+input.not-readonly:focus ~ .text-input-bar:before,
+input.not-readonly:focus ~ .text-input-bar:after {
+  width: 50%;
+}
+
+
+/* HIGHLIGHTER ================================== */
+
+.text-input-highlight {
+  position: absolute;
+  height: 50%;
+  width: 100px;
+  top: 25%;
+  left: 0;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+
+/* active state */
+
+input.not-readonly:focus ~ .text-input-highlight {
+  -webkit-animation: inputHighlighter 0.3s ease;
+  -moz-animation: inputHighlighter 0.3s ease;
+  animation: inputHighlighter 0.3s ease;
+}
+textarea.not-readonly:focus {
+  border: 2px solid #5264AE;
+}
+
+
+/* ANIMATIONS ================ */
+
+@-webkit-keyframes inputHighlighter {
+  from {
+    background: #5264AE;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+
+@-moz-keyframes inputHighlighter {
+  from {
+    background: #5264AE;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+
+@keyframes inputHighlighter {
+  from {
+    background: #5264AE;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+
+.tag-typer {
+  outline: none;
+  border: none;
+  padding: 6px;
+  margin: 3px;
+  margin-right: -25px;
+  width: 100px;
+  background-color: transparent;
+  font-size: 14px;
+  color: #333;
+  border-bottom: 1px solid rgba(0, 0, 0, .14);
+}
+
+.tag {
+  display: inline-block;
+  background: #00a0d8;
+  color: #FFF;
+  padding: 5px 10px;
+  border-radius: 3px;
+  margin: 2px 20px 2px 2px;
+  font: normal 16px sans-serif;
+  position: relative;
+  cursor: default;
+  box-shadow: 1px 1px 0 rgba(0,0,0,.2);
+  transition: all .1s;
+}
+.tag .close {
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+  text-align: center;
+  border-radius: 1em;
+  position: absolute;
+  background: inherit;
+  right: -6px;
+  top: -6px;
+  z-index: 3;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, .12);
+  visibility: hidden;
+}
+
+.tag:hover .close {
+  visibility: visible;
+}
+
+.checkbox ul,
+.tags ul {
+  padding: .2em .7em .7em .35em;
+  margin: 0;
+}
+.checkbox li {
+  display: inline-block;
+  padding: .4em;
+  margin: 2px 20px 2px 2px;
+  /*border: 1px solid rgba(0, 0, 0, .14);*/
+  border-radius: 4px;
+  list-style: none;
+  cursor: pointer;
+}
+.checkbox-true {
+  color: #fafafa;
+  background-color: #00a0d8;
+}
+.checkbox-false {
+  color: #333;
+  background-color: #f4f4f4;
+}
+
+.profile-form .input-group, .new-collection .input-group, .change-password .input-group {
+  margin-bottom: 3em;
+  border-bottom: 1px solid rgba(0, 0, 0, .14);
 }
 .base-form-message {
-  margin: 0 auto;
-  padding: .8rem;
-  width: 80%;
-  color: #f7fafc;
-}
-.base-form-message.ok {
   display: none;
 }
-.base-form-message.error {
-  background-color: #CD314E;
+.submit {
+  outline: none;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, .14);
+  border-radius: 3px;
+  color: #fff;
+  background: #00a0d8;
+  padding: .3em 1em;
+  display: block;
+}
+.profile-form .submit, .new-collection .submit, .change-password .submit {
+  margin: 0 auto;
+  margin-bottom: 3em;
 }

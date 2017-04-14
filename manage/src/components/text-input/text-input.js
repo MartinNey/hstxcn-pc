@@ -4,11 +4,10 @@ import BasicTextInput from './basic-text-input';
 class TextInput extends Component {
 
   render() {
-    const {...allProps} = this.props;
     return (
       <BasicTextInput
         type="text"
-        {...allProps}
+        {...this.props}
       />
     );
   }

@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import BasicTextInput from './basic-text-input';
 
-class PasswordInput extends Component {
+class Textarea extends Component {
 
   render() {
     return (
       <BasicTextInput
-        type="password"
+        type="textarea"
         {...this.props}
       />
     );
   }
 }
 
-export default PasswordInput;
+export default Textarea;

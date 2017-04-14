@@ -7,6 +7,7 @@ import MultiCheckbox from '../select-input/multi-checkbox';
 import ImageInput from '../collections/image-input';
 import Tag from '../tags/tag';
 import './inputs.css';
+import Textarea from "../text-input/textarea";
 
 class BaseForm extends Component {
   constructor(props) {
@@ -30,6 +31,22 @@ class BaseForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.transToForm = this.transToForm.bind(this);
   }
+  componentWillReceiveProps(props) {
+    const state = props.formConfig.reduce((acc, val) => {
+      acc[val.inputName] = props.formValue[val.inputName] || {
+        value: val.value,
+        readOnly: false,
+      };
+      return acc;
+    }, {
+      msg: {
+        // ok/error/processing
+        type: 'ok',
+        content: ''
+      }
+    });
+    this.setState({...state});
+  }
   transToForm() {
     return this.props.formConfig.reduce((acc, val) => {
       if (!this.state[val.inputName].readOnly) {
@@ -52,16 +69,14 @@ class BaseForm extends Component {
       headers: {'Authorization': this.props.auth},
       data: this.transToForm()
     }).then((res) => {
-      this.props.request['then'](res);
       this.setState({
         msg: {
           type: 'ok',
           content: 'success'
         }
       });
+      this.props.request['then'](res);
     }).catch((err) => {
-      this.props.request['error'](err);
-
       const data = err.response ? err.response.data : [{'error': 'unknown error'}];
       const msg = data[0]['error'] || '';
       this.setState({
@@ -69,6 +84,7 @@ class BaseForm extends Component {
           content: msg
         }
       });
+      this.props.request['error'](err);
     });
   }
   handleSubmit(e) {
@@ -91,6 +107,7 @@ class BaseForm extends Component {
           content: status.msg
         }
       });
+      this.props.request['error'](status.msg);
     } else {
       this.trySubmit();
     }
@@ -103,68 +120,77 @@ class BaseForm extends Component {
       /* eslint no-unused-vars: "off" */
       const {id, values, ...props} = form;
       switch (form.type) {
-      case 'text':
-        return (
-          <TextInput
-            {...props}
-            key={form.id}
-            value={this.state[form.inputName].value}
-            readOnly={this.state[form.inputName].readOnly}
-            onValueUpdate={this.handleFormChange}
-          />);
-      case 'password':
-        return (
-          <PasswordInput
-            {...props}
-            key={form.id}
-            value={this.state[form.inputName].value}
-            readOnly={this.state[form.inputName].readOnly}
-            onValueUpdate={this.handleFormChange}
-          />);
-      case 'single-checkbox':
-        return (
-          <SingleCheckbox
-            {...props}
-            key={form.id}
-            value={this.state[form.inputName].value}
-            values={this.props.options[form.inputName] || values}
-            readOnly={this.state[form.inputName].readOnly}
-            onValueUpdate={this.handleFormChange}
-          />);
-      case 'multi-checkbox':
-        return (
-          <MultiCheckbox
-            {...props}
-            key={form.id}
-            value={this.state[form.inputName].value}
-            values={this.props.options[form.inputName] || values}
-            readOnly={this.state[form.inputName].readOnly}
-            onValueUpdate={this.handleFormChange}
-          />);
-      case 'tag':
-        return (
-          <Tag
-            {...props}
-            key={form.id}
-            value={this.state[form.inputName].value}
-            readOnly={this.state[form.inputName].readOnly}
-            onValueUpdate={this.handleFormChange}
-          />);
-      case 'image-input':
-        return (
-          <ImageInput
-            {...props}
-            key={form.id}
-            value={this.state[form.inputName].value}
-            readOnly={this.state[form.inputName].readOnly}
-            onValueUpdate={this.handleFormChange}
-          />);
-      default:
-        return (
-          <div
-            key={form.id}
-          >Unexpected type</div>
-        );
+        case 'text':
+          return (
+            <TextInput
+              {...props}
+              key={form.id}
+              value={this.state[form.inputName].value}
+              readOnly={this.state[form.inputName].readOnly}
+              onValueUpdate={this.handleFormChange}
+            />);
+        case 'textarea':
+          return (
+            <Textarea
+              {...props}
+              key={form.id}
+              value={this.state[form.inputName].value}
+              readOnly={this.state[form.inputName].readOnly}
+              onValueUpdate={this.handleFormChange}
+            />);
+        case 'password':
+          return (
+            <PasswordInput
+              {...props}
+              key={form.id}
+              value={this.state[form.inputName].value}
+              readOnly={this.state[form.inputName].readOnly}
+              onValueUpdate={this.handleFormChange}
+            />);
+        case 'single-checkbox':
+          return (
+            <SingleCheckbox
+              {...props}
+              key={form.id}
+              value={this.state[form.inputName]}
+              values={this.props.options[form.inputName] || values}
+              readOnly={this.state[form.inputName].readOnly}
+              onValueUpdate={this.handleFormChange}
+            />);
+        case 'multi-checkbox':
+          return (
+            <MultiCheckbox
+              {...props}
+              key={form.id}
+              value={this.state[form.inputName].value}
+              values={this.props.options[form.inputName] || values}
+              readOnly={this.state[form.inputName].readOnly}
+              onValueUpdate={this.handleFormChange}
+            />);
+        case 'tag':
+          return (
+            <Tag
+              {...props}
+              key={form.id}
+              value={this.state[form.inputName].value}
+              readOnly={this.state[form.inputName].readOnly}
+              onValueUpdate={this.handleFormChange}
+            />);
+        case 'image-input':
+          return (
+            <ImageInput
+              {...props}
+              key={form.id}
+              value={this.state[form.inputName].value}
+              readOnly={this.state[form.inputName].readOnly}
+              onValueUpdate={this.handleFormChange}
+            />);
+        default:
+          return (
+            <div
+              key={form.id}
+            >Unexpected type</div>
+          );
       }
     });
     return (
@@ -175,10 +201,7 @@ class BaseForm extends Component {
         <div className={'base-form-message ' + this.state.msg.type}>
           {this.state.msg.content}
         </div>
-        <input
-          className="submit"
-          type="submit"
-          value={this.props.request.name} />
+        <button className="submit">{this.props.request.name}</button>
       </form>
     );
   }

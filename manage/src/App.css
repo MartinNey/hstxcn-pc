@@ -4,12 +4,14 @@
 
 nav {
   background-color: #424242;
-  border-bottom: 4px solid #E91E63;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.14);
   height: 60px;
+}
+nav a {
+  color: antiquewhite;
 }
 
 .app-logo {
-  animation: app-logo-spin infinite 20s linear;
   display: inline-block;
   float: left;
   height: 40px;
@@ -35,7 +37,64 @@ nav {
   padding: 10px;
 }
 
-@keyframes app-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.user-info img {
+  float: left;
+  height: 40px;
+  line-height: 40px;
+}
+.user-info p {
+  line-height: 40px;
+  margin: 0 1em;
+  display: inline-block;
+  height: 40px;
+}
+.main {
+  height: 100%;
+  width: 980px;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 100px;
+  border: 1px solid #e1e2e5;
+  background: #fafafa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.user-left {
+  min-height: 500px;
+  width: 150px;
+  box-sizing: border-box;
+  border-right: 1px solid #e1e2e5;
+  float: left;
+}
+.router {
+  background: #fff;
+  width: 830px;
+  float: right;
+}
+.user-left-title {
+  height: 50px;
+  line-height: 50px;
+  padding-left: 30px;
+  color: #99a2aa;
+  border-bottom: 1px solid #e1e2e5;
+}
+.user-left ul {
+  margin: 0;
+  padding: 0;
+}
+.user-left li {
+  height: 40px;
+  line-height: 40px;
+  color: #99a2aa;
+}
+.user-left a {
+  display: block;
+  text-decoration: none;
+  padding-left: 34px;
+  color: #222
+}
+.user-left a.active-link {
+  background-color: #00A1D7;
+  color: #fff;
 }

@@ -1,0 +1,101 @@
+.collections-title,
+.new-collection-title,
+.collection-upload-title,
+.collection-info-title,
+.collection-images-title {
+  margin: 0;
+  height: 50px;
+  line-height: 50px;
+  padding-left: 30px;
+  color: #00a0d8;
+  border-bottom: 1px solid #e1e2e5;
+}
+
+.collections button,
+.image-upload-button,
+.collection button {
+  border-radius: 3px;
+  padding: .3em 1em;
+  border: 1px solid #e1e2e5;
+  color: #fafafa;
+  background-color: #00a0d8;
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+.collections button {
+  margin: 30px 0 0 30px;
+}
+.collection button {
+  margin: 30px;
+}
+.collection form {
+  border-bottom: 1px solid #e1e2e5;
+}
+
+.collections {
+  min-height: 500px;
+}
+
+.collections ul {
+  border-top: 1px solid #e1e2e5;
+  margin: 30px;
+  padding: 0;
+}
+
+.collections li {
+  border-bottom: 1px solid #e1e2e5;
+  padding: .3em;
+  list-style: none;
+}
+/*.collection:hover {*/
+  /*border-bottom: 1px solid #e1e2e5;*/
+/*}*/
+.collection-name, .collection-detail, .delete-collection {
+  color: #424242;
+  margin: 0;
+  padding: .3em 1em;
+  width: 30%;
+}
+.collection-name, .collection-detail {
+  float: left;
+}
+.collection:hover .delete-collection {
+  visibility: visible;
+}
+.delete-collection {
+  visibility: hidden;
+  cursor: pointer;
+  height: 1em;
+  width: 1em;
+  float: right;
+}
+.image-wrap.with-dashed {
+  border-color: #99a2aa;
+}
+.image-wrap p {
+  margin: 0;
+}
+.image-wrap {
+  border: dashed;
+  border-color: rgba(0,0,0,0);
+  width: 10rem;
+  height: 10rem;
+  line-height: 10rem;
+  color: #99a2aa;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  margin: 1rem;
+  float: left;
+  text-align: center;
+}
+.upload-images {
+  width: 100%;
+  padding: 1em;
+}
+.image-upload-button {
+  display: inline-block;
+  margin: 1em;
+}

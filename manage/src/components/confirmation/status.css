@@ -1,0 +1,22 @@
+.status {
+  min-height: 500px;
+}
+.status-title {
+  margin: 0;
+  height: 50px;
+  line-height: 50px;
+  padding-left: 30px;
+  color: #00a0d8;
+  border-bottom: 1px solid #e1e2e5;
+}
+.status-info {
+  padding: 30px;
+}
+.status-info button {
+  border-radius: 3px;
+  padding: .3em 1em;
+  border: 1px solid #e1e2e5;
+  color: #fafafa;
+  background-color: #00a0d8;
+  cursor: pointer;
+}

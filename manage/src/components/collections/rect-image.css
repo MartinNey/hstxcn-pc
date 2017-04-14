@@ -1,0 +1,67 @@
+.image-preview {
+  width: 10rem;
+  height: 10rem;
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
+  -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
+  position: relative;
+  display: inline-block;
+  float: left;
+  background-color: #222222;;
+}
+.image-preview-detail {
+  z-index: 5;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+}
+.image-preview div {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+}
+.image-preview-not-detail:hover .hover-info {
+  display: block;
+}
+.hover-info {
+  background-color: rgba(0, 0, 0, .14);
+  display: none;
+  visibility: visible;
+  height: 100%;
+  width: 100%;
+  z-index: 3;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+.image-info {
+  color: #fff;
+  display: block;
+  width: 50%;
+  margin: 25% auto;
+  text-align: center;
+}
+.delete-button {
+  cursor: pointer;
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+  text-align: center;
+  border-radius: 1em;
+  position: absolute;
+  background: inherit;
+  right: -.5em;
+  top: -.5em;
+  z-index: 5;
+  color: #fff;
+  background-color: #00a0d8;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, .12);
+}

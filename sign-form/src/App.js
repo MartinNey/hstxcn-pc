@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import logo from './logo.jpg';
 import './App.css';
 import SignForm from './components/sign-form';
 

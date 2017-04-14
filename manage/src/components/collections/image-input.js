@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ImagePreview from './image-preview';
+import RectImage from './rect-image';
 import './image-input.css';
 
 class ImageInput extends Component {
@@ -30,9 +30,9 @@ class ImageInput extends Component {
     // });
     return this.props.value.map((link, index) => {
       return (
-        <ImagePreview
-          key={index}
-          imageSrc={link} />
+        <RectImage
+          url={link}
+        />
       );
     });
   }

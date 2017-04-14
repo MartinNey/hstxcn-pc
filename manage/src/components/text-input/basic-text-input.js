@@ -22,33 +22,42 @@ class BasicTextInput extends Component {
   }
   makeClassName() {
     return 'text-input'
-    + (this.props.validator(this.props.value) ? ' valid' : ' invalid')
-    + (this.state.touched ? ' touched' : ' untouched')
-    + (this.state.isFocused ? ' focused' : '');
+      + (this.props.validator(this.props.value) ? ' valid' : ' invalid')
+      + (this.state.touched ? ' touched' : ' untouched')
+      + (this.state.isFocused ? ' focused' : '');
   }
   render() {
+    const {...props} = {
+      placeholder: this.props.placeholder,
+      value: this.props.value,
+      readOnly: this.props.readOnly,
+      className: this.props.readOnly ? 'readonly' : 'not-readonly',
+      onFocus: () => {
+        this.setState({
+          touched: true,
+          isFocused: true
+        });
+      },
+      onBlur: () => {
+        this.setState({
+          isFocused: false
+        });
+      },
+      onChange: (e) => this.handleChange(e.target.value),
+      name: this.props.inputName,
+    };
     return (
       <div className={this.makeClassName()}>
         <label htmlFor={this.props.inputName}>
           {this.props.label}
         </label>
-          <input type={this.props.type}
-                 placeholder={this.props.placeholder}
-                 defaultValue={this.props.value}
-                 onFocus={() => {
-                   this.setState({
-                     touched: true,
-                     isFocused: true
-                   });
-                 }}
-                 onBlur={() => {
-                   this.setState({
-                     isFocused: false
-                   });
-                 }}
-                 onChange={(e) => this.handleChange(e.target.value)}
-                 name={this.props.inputName}
-          />
+        {
+          this.props.type === 'textarea'
+            ? <textarea {...props} />
+            : <input {...props} type={this.props.type} />
+        }
+        <span className="text-input-highlight" />
+        <span className="text-input-bar" />
       </div>
     );
   }
