@@ -19,9 +19,14 @@
         setTimeout(() => {
           window.location.href = '/manage';
         }, 3000);
+      } else {
+        document.getElementById("info").innerHTML = '链接错误或过期，即将跳转至管理页面';
+        setTimeout(() => {
+          window.location.href = '/manage';
+        }, 3000);
       }
     };
-    var path = 'api' + window.location.pathname;
+    var path = '/api' + window.location.pathname;
     xhttp.open("POST", path, true);
     xhttp.send();
   </script>
