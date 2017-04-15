@@ -69,7 +69,7 @@ class Status extends Component {
       headers: {
         Authorization: this.props.auth,
       },
-      url: `/user/${this.props.id}/confirmation`
+      url: `/api/user/${this.props.id}/confirmation`
     }).then((res) => {
       Alert.success('邮件以发送，请注意查收');
       this.props.onUpdate();
