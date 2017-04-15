@@ -6,6 +6,9 @@ import './status.css';
 class Status extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      sendCD: 0,
+    };
     this.statusChinese = {
       unconfirmed: '未验证邮箱',
       confirmed: '未提交审核',
@@ -17,6 +20,10 @@ class Status extends Component {
       unconfirmed: (
         <div>
           <p>账户尚未验证邮箱，请前往您的个人邮箱确认</p>
+          <button disabled={this.state.sendCD > 0} onClick={(e) => this.resendConfirmation()}>重新发送</button>
+          {
+            this.state.sendCD > 0 ? (<p className="send-cd">{this.state.sendCD}秒后可重新发送</p>) : null
+          }
         </div>
       ),
       confirmed: (
@@ -56,6 +63,20 @@ class Status extends Component {
       this.props.onError(err);
     });
   }
+  resendConfirmation() {
+    Axios({
+      method: 'post',
+      headers: {
+        Authorization: this.props.auth,
+      },
+      url: `/user/${this.props.id}/confirmation`
+    }).then((res) => {
+      Alert.success('邮件以发送，请注意查收');
+      this.props.onUpdate();
+    }).catch((err) => {
+      this.props.onError(err);
+    });
+  }
 
   render() {
     return (
@@ -72,6 +93,7 @@ class Status extends Component {
 }
 
 Status.propTypes = {
+  id: React.PropTypes.string,
   status: React.PropTypes.oneOf([
     'unconfirmed',
     'confirmed',

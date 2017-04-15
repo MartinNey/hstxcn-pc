@@ -194,6 +194,7 @@ class App extends Component {
       return (<Status
         {...props}
         status={this.state.profile.status}
+        id={this.state.profile.id || ''}
         {...commonProps}
         onError={onError(props)}
       />);
