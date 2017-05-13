@@ -17,6 +17,7 @@ class User extends Component {
       <p className="user-detail-description">描述：{user.description}</p>
       <p className="user-detail-sex">性别：{user.sex ? '男': '女'}</p>
       <p className="user-detail-major">专业：{user.major}</p>
+      <p className="user-detail-imagelink">图集链接：{user.imagelink}</p>
       <p className="user-detail-likes">点赞：{user.likes}</p>
       <div className="user-detail-tags">标签：{
         user.tags.map((tag, index) => (<p key={index} className="user-detail-tag">{tag.text}</p>))
