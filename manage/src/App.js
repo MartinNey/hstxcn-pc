@@ -171,21 +171,28 @@ class App extends Component {
       admin: {
         name: '管理员',
         buttonText: '无操作',
-        clickHandler: () => console.log('click~click~')
+        anotherText: '无操作',
+        clickHandler: () => console.log('click~click~'),
+        anotherHandler: () => console.log('click~click~')
       },
       unconfirmed: {
         name: '未验证邮箱',
         buttonText: '无操作',
-        clickHandler: () => console.log('click~click~')
+        anotherText: '无操作',
+        clickHandler: () => console.log('click~click~'),
+        anotherHandler: () => console.log('click~click~')
       },
       confirmed: {
         name: '未提交审核',
         buttonText: '无操作',
-        clickHandler: () => console.log('click~click~')
+        anotherText: '无操作',
+        clickHandler: () => console.log('click~click~'),
+        anotherHandler: () => console.log('click~click~')
       },
       reviewing: {
         name: '审核中',
-        buttonText: '通过审核',
+        buttonText: '通过',
+        anotherText: '拒绝',
         clickHandler: (user) => Axios({
           url: `/api/user/activate`,
           headers: {
@@ -201,12 +208,8 @@ class App extends Component {
           this.loadCollections();
         }).catch((err) => {
           Alert.error(`出错，${err}`);
-        })
-      },
-      reviewed: {
-        name: '已通过审核',
-        buttonText: '取消审核资质',
-        clickHandler: (user) => Axios({
+        }),
+        anotherHandler: (user) => Axios({
           url: `/api/user/activate`,
           headers: {
             Authorization: this.state.auth,
@@ -216,12 +219,19 @@ class App extends Component {
           },
           method: 'delete'
         }).then(() => {
-          Alert.success(`已将用户'${user.name}'审核状态取消`);
+          Alert.success(`已拒绝用户'${user.name}'审核`);
           this.loadProfile();
           this.loadCollections();
         }).catch((err) => {
           Alert.error(`出错，${err}`);
         })
+      },
+      reviewed: {
+        name: '已通过审核',
+        buttonText: '无操作',
+        anotherText: '无操作',
+        clickHandler: () => console.log('click~click~'),
+        anotherHandler: () => console.log('click~click~')
       }
     };
     const commonProps = {

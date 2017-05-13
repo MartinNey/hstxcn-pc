@@ -27,6 +27,12 @@ class Users extends Component {
           >
             {this.props.statusConfig[user.status].buttonText}
           </div>
+          <div
+            onClick={() => this.props.statusConfig[user.status].anotherHandler(user)}
+            className="user-list-par user-list-button"
+          >
+            {this.props.statusConfig[user.status].anotherText}
+          </div>
         </li>
       );
     });

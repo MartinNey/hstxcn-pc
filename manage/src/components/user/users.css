@@ -11,7 +11,7 @@
 }
 .user-list a, .user-list-info {
   display: inline-block;
-  width: 86%;
+  width: 80%;
 }
 .user-list li:hover {
   background-color: #dddddd;
@@ -44,7 +44,7 @@
   margin-left: 2%;
 }
 .user-list-button {
-  width: 14%;
+  width: 10%;
 }
 .user-list-button:hover {
   color: firebrick;
