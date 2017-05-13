@@ -1,0 +1,65 @@
+.user-list {
+  padding-left: 2em;
+  padding-top: 1em;
+}
+
+.user-list li {
+  list-style: none;
+  cursor: pointer;
+  padding: .5em;
+  border-top: 1px solid #dddddd;
+}
+.user-list a, .user-list-info {
+  display: inline-block;
+  width: 86%;
+}
+.user-list li:hover {
+  background-color: #dddddd;
+}
+.user-list-par {
+  color: #222222;
+  display: inline-block;
+  padding: .3em;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+/*.user-list-par:hover {*/
+  /*width: auto;*/
+  /*position: relative;*/
+  /*background-color: #dddddd;*/
+  /*overflow: visible;*/
+/*}*/
+.user-list-name {
+  width: 20%;
+}
+.user-list-status {
+  width: 20%;
+  margin-left: 2%;
+}
+.user-list-description {
+  width: 56%;
+  margin-left: 2%;
+}
+.user-list-button {
+  width: 14%;
+}
+.user-list-button:hover {
+  color: firebrick;
+  background-color: #99a2aa;
+  font-weight: bold;
+}
+
+.user-detail {
+  padding: 2em;
+}
+.user-detail > p, .user-detail > div {
+  margin: 1em 0;
+}
+.user-detail-tag {
+  display: inline-block;
+  width: auto;
+  margin: 0 1em;
+}

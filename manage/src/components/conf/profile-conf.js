@@ -4,7 +4,7 @@ const FORM_CONFIG = [
   //   id: 0,
   //   inputName: 'phone_number',
   //   label: '手机',
-  //   type: 'text',
+  //   type: 'buttonText',
   //   value: this.props.profile,
   //   placeholder: '1xxxxxxxxxx',
   //   validator: (value) => /^1[0-9]{10}$/.test(value),
