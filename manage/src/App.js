@@ -81,7 +81,7 @@ class App extends Component {
       Alert.error('登录失败，即将跳转至登录页面');
       setTimeout(() => {
         // TODO: while debugging
-        // window.location.href = '/login';
+        window.location.href = '/login';
       }, 3000);
     });
   }
