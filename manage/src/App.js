@@ -79,9 +79,10 @@ class App extends Component {
       });
     }).catch((err) => {
       Alert.error('登录失败，即将跳转至登录页面');
+      console.error(err);
       setTimeout(() => {
         // TODO: while debugging
-        window.location.href = '/login';
+        // window.location.href = '/login';
       }, 3000);
     });
   }
@@ -92,10 +93,7 @@ class App extends Component {
     const profile = {
       status: status || 'reviewed',
       avatar: avatar || {
-        readOnly: true,
-        value: {
-          path: ''
-        }
+        path: ''
       },
       tags: {
         readOnly: false,
@@ -155,7 +153,11 @@ class App extends Component {
         collections: res.data
       });
     }).catch((err) => {
-      Alert.error('获取图集失败，请检查网络连接');
+      if (this.state.profile.status === 'unconfirmed') {
+        Alert.info('未验证邮箱不可操作图集');
+      } else {
+        Alert.error('获取图集失败，请检查网络连接');
+      }
     });
   }
   render() {
@@ -381,7 +383,7 @@ class App extends Component {
                 (<div>Loading...</div>):
                 (
                   <div className="user-info">
-                    <img src={this.state.profile.avatar.value.path} alt="avatar" />
+                    <img src={this.state.profile.avatar.path} alt="avatar" />
                     <p className="user-name">
                       {this.state.profile.name.value}
                     </p>
