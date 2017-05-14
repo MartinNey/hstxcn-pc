@@ -230,9 +230,24 @@ class App extends Component {
       },
       reviewed: {
         name: '已通过审核',
-        buttonText: '无操作',
+        buttonText: '取消审核',
         anotherText: '无操作',
-        clickHandler: () => console.log('click~click~'),
+        clickHandler: (user) => Axios({
+          url: `/api/user/activate`,
+          headers: {
+            Authorization: this.state.auth,
+          },
+          data: {
+            email: user.email
+          },
+          method: 'delete'
+        }).then(() => {
+          Alert.success(`已取消用户'${user.name}'审核资质`);
+          this.loadProfile();
+          this.loadCollections();
+        }).catch((err) => {
+          Alert.error(`出错，${err}`);
+        }),
         anotherHandler: () => console.log('click~click~')
       }
     };
