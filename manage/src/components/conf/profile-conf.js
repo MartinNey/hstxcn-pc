@@ -61,8 +61,8 @@ const FORM_CONFIG = [
     label: '专业:',
     type: 'text',
     value: '',
-    placeholder: '软件工程',
-    validator: isNotEmpty,
+    placeholder: '例如：软件工程（选填）',
+    validator: (value) => true,
     trans: (value) => value,
     error: '专业不可为空'
   },
@@ -72,8 +72,8 @@ const FORM_CONFIG = [
     label: '图集:',
     type: 'text',
     value: '',
-    placeholder: 'http://www.hustunique.com',
-    validator: isNotEmpty,
+    placeholder: '例如：http://www.hustunique.com（选填）',
+    validator: (value) => true,
     trans: (value) => value,
     error: '图集链接不可为空'
   },

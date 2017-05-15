@@ -18,8 +18,8 @@ const FORM_CONFIG = [
     label: '描述',
     type: 'text',
     value: '',
-    placeholder: '(必填项）',
-    validator: isNotEmpty,
+    placeholder: '(选填）',
+    validator: value => true,
     trans: (value) => value,
     error: '描述不可为空'
   },
@@ -29,6 +29,7 @@ const FORM_CONFIG = [
     label: '模特',
     type: 'text',
     value: '',
+    placeholder: '(选填）',
     validator: value => true,
     trans: (value) => value,
     error: '模特名不可为空'
@@ -39,6 +40,7 @@ const FORM_CONFIG = [
     label: '后期',
     type: 'text',
     value: '',
+    placeholder: '(选填）',
     validator: value => true,
     trans: (value) => value,
     error: '后期内容不可为空'
@@ -49,6 +51,7 @@ const FORM_CONFIG = [
     label: '摄影时间',
     type: 'text',
     value: '',
+    placeholder: '(选填）',
     validator: value => true,
     trans: (value) => value,
     error: '摄影时间不可为空'

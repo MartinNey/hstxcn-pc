@@ -109,6 +109,11 @@ class ImageUploader extends Component {
     }
   }
   onSubmit() {
+    const maxImages = this.props.maxImages === null ? 30 : this.props.maxImages;
+    if (maxImages < this.state.files.length) {
+      Alert.error('图片数目已超过限制，请减少部分图片！');
+      return;
+    }
     this.total = this.state.files.length;
     this.counts = 0;
     this.setState({
@@ -122,6 +127,14 @@ class ImageUploader extends Component {
     return (
       <div>
         <p className="collection-upload-title">上传图片</p>
+        {
+          this.props.description
+            ? <p className="collection-upload-description">{this.props.description}</p>
+            : null
+        }
+        <p className="collection-upload-image-max">还可上传图片数：{this.props.maxImages !== null
+          ? this.props.maxImages
+          : '无限制'}</p>
         {this.state.files.map((file, index) =>
           <div key={index}
                className="image-wrap">
@@ -141,12 +154,12 @@ class ImageUploader extends Component {
         <div className="no-float" />
         <button
           className={'image-upload-button '+ (this.state.uploading ? 'uploading-button' : '')}
-          disabled={this.state.uploading}
+          disabled={this.state.uploading || (this.state.files.length === 0)}
           onClick={this.onSubmit}>
           {
               this.state.uploading ?
                 <p>正在上传...</p> :
-                <p>上传{this.state.files.length}张图片</p>
+                <p>{this.state.files.length > 0 ? `上传${this.state.files.length}张图片` : '无图片'}</p>
           }
         </button>
       </div>
@@ -155,6 +168,8 @@ class ImageUploader extends Component {
 }
 ImageUploader.propTypes = {
   auth: React.PropTypes.string,
+  description: React.PropTypes.string,
+  maxImages: React.PropTypes.number,
   onUpdate: React.PropTypes.func,
   history: React.PropTypes.object,
   uuid: React.PropTypes.string

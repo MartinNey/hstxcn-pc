@@ -18,9 +18,15 @@
 .text-input input {
   border-bottom: 1px solid rgba(0, 0, 0, 0);
 }
-.text-input textarea {
-  height: 6em;
+.text-input textarea.not-readonly {
   border: 2px solid rgba(0, 0, 0, .14);
+}
+.text-input textarea.readonly {
+  border: 2px solid rgba(0, 0, 0, 0);
+}
+.text-input textarea {
+  outline: none;
+  height: 6em;
   transition: all .2s;
   resize: none;
 }

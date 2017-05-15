@@ -72,6 +72,9 @@ class Collection extends Component {
         >
           <ImageUploader
             onUpdate={this.props.onUpdate}
+            maxImages={this.props.maxImages
+              ? this.props.maxImages - this.props.profile.images.length
+              : null}
             uuid={this.props.profile.id}
             history={this.props.history}
             auth={this.props.auth}
@@ -82,6 +85,8 @@ class Collection extends Component {
   }
 }
 Collection.propTypes = {
+  description: React.PropTypes.string,
+  maxImages: React.PropTypes.number,
   profile: React.PropTypes.object,
   auth: React.PropTypes.string,
   history: React.PropTypes.object,

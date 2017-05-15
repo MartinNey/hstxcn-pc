@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import Axios from 'axios';
-import Alert from 'react-s-alert';
+// import Axios from 'axios';
+// import Alert from 'react-s-alert';
 // import RectImage from "../collections/rect-image";
 
 import './users.css';
 
 class Users extends Component {
-
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     const usersEle = this.props.users.map((user, index) => {

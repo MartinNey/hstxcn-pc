@@ -109,7 +109,7 @@ class App extends Component {
         };
         switch (props) {
           case 'tags':
-            profile[props].value = {...other}[props].map((value) => value.buttonText);
+            profile[props].value = {...other}[props].map((value) => value.text);
             break;
           case 'school':
             profile[props].value = {...other}[props]['id'];
@@ -298,8 +298,24 @@ class App extends Component {
           {...props}
           {...commonProps}
           onError={onError(props)}
+          maxImages={20}
+          description='作品图集，将展示在友拍属于您的摄影师主页中。每个图集最多可上传20张图片。'
           readOnly={!['reviewed', 'admin', 'confirmed'].includes(this.state.profile.status)}
           profile={profile}
+        />
+      ) : null;
+    };
+    const cover = (props) => {
+      const cover = this.state.profile.cover;
+      return cover ? (
+        <Collection
+          {...props}
+          {...commonProps}
+          onError={onError(props)}
+          maxImages={8}
+          description='封面图集，个人代表作品。将会在摄影师列表中，第一时间呈现给用户。最多可上传8张图片。'
+          readOnly={!['reviewed', 'admin', 'confirmed'].includes(this.state.profile.status)}
+          profile={cover.value}
         />
       ) : null;
     };
@@ -373,6 +389,10 @@ class App extends Component {
         render: collection,
       },
       {
+        path: '/cover',
+        render: cover,
+      },
+      {
         path: '/new/collection',
         render: newCollection,
       },
@@ -438,6 +458,10 @@ class App extends Component {
                         {
                           to: '/profile',
                           name: '个人信息'
+                        },
+                        {
+                          to: '/cover',
+                          name: '封面'
                         },
                         {
                           to: '/collections',

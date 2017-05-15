@@ -5,6 +5,11 @@ import FORM_CONFIG from './conf/profile-conf';
 import './form/inputs.css';
 
 class ProfileForm extends Component {
+  componentWillMount() {
+    if (['unconfirmed', 'reviewing'].includes(this.props.profile.status)) {
+      Alert.info('账号未验证邮箱或正在审核中，个人资料与图集均不可编辑');
+    }
+  }
   render() {
     return (
       <div className="profile-form">

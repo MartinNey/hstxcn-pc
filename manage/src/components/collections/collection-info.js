@@ -34,6 +34,11 @@ class CollectionInfo extends Component {
     return (
       <div className="collection-info">
         <p className="collection-info-title">图集信息</p>
+        {
+          this.props.description
+            ? <p className="collection-description">*{this.props.description}</p>
+            : null
+        }
         <BaseForm
           formConfig={FORM_CONFIG}
           formValue={formValue}
@@ -62,6 +67,7 @@ class CollectionInfo extends Component {
 CollectionInfo.propTypes = {
   profile: React.PropTypes.object,
   auth: React.PropTypes.string,
+  description: React.PropTypes.string,
   history: React.PropTypes.object,
   onUpdate: React.PropTypes.func,
   onError: React.PropTypes.func,

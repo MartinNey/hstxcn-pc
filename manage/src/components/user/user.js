@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import RectImage from '../collections/rect-image';
-import BaseForm from '../form/base-form';
-import FORM_CONFIG from '../conf/profile-conf';
 
 class User extends Component {
   render() {
@@ -21,6 +19,7 @@ class User extends Component {
       </div>
       <p className="user-detail-name">姓名：{user.name}</p>
       <p className="user-detail-description">描述：{user.description}</p>
+      <p className="user-detail-email">邮箱：{user.email}</p>
       <p className="user-detail-sex">性别：{user.sex ? '男': '女'}</p>
       <p className="user-detail-major">专业：{user.major}</p>
       <p className="user-detail-imagelink">图集链接：{user.imagelink}</p>

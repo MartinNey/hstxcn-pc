@@ -99,3 +99,13 @@ button:disabled {
   display: inline-block;
   margin: 1em;
 }
+
+.collection-description, .collection-upload-image-max {
+  margin: 1.4em 0;
+  padding-left: 30px;
+  color: #00a0d8;
+  font-size: .9em;
+}
+.collection-upload-image-max {
+
+}
