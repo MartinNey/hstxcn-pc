@@ -46,6 +46,7 @@ class Collections extends Component {
     return (
       <div className="collections">
         <div className="collections-title">图集管理</div>
+        <p className="collection-description">*（请确保先上传封面图集）</p>
         <button onClick={() => {
           this.props.history.push('/new/collection');
         }}>新建</button>
