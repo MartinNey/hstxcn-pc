@@ -4,6 +4,7 @@ import RectImage from '../collections/rect-image';
 class User extends Component {
   render() {
     const user = this.props.user;
+    const collections = [user.cover].concat(user.collections);
     return (<div className="user-detail">
       <div
         onClick={() => this.props.statusConfig[user.status].clickHandler(user)}
@@ -32,7 +33,7 @@ class User extends Component {
       }
       </div>
       <div className="user-detail-collections">图集：
-        {user.collections.map((collection, index) => {
+        {collections.map((collection, index) => {
           const allImages = collection.images.map((image, index) =>
             <div
               key={index}
