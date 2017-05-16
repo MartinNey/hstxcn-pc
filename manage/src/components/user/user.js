@@ -22,6 +22,7 @@ class User extends Component {
       <p className="user-detail-description">描述：{user.description}</p>
       <p className="user-detail-email">邮箱：{user.email}</p>
       <p className="user-detail-sex">性别：{user.sex ? '男': '女'}</p>
+      <p className="user-detail-scholl">学校：{user.school ? user.school.name : ''}</p>
       <p className="user-detail-major">专业：{user.major}</p>
       <p className="user-detail-imagelink">图集链接：{user.imagelink}</p>
       <p className="user-detail-likes">点赞：{user.likes}</p>
@@ -29,7 +30,7 @@ class User extends Component {
         user.tags.map((tag, index) => (<p key={index} className="user-detail-tag">{tag.text}</p>))
       }</div>
       <div className="user-detail-categories">类目：{
-        user.categories.map((single, index) => (<p key={index} className="user-detail-single">{single}</p>))
+        user.categories.map((single, index) => (<p key={index} className="user-detail-single">{single.name}</p>))
       }
       </div>
       <div className="user-detail-collections">图集：
