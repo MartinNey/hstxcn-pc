@@ -3,7 +3,6 @@ import cookie from 'react-cookie';
 import Axios from 'axios';
 import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';
-// import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 import 'react-s-alert/dist/s-alert-css-effects/scale.css';
 import {
   BrowserRouter as Router,
@@ -22,7 +21,8 @@ import Admin from "./components/admin/admin";
 import User from "./components/user/user";
 import './App.css';
 import logo from './logo.png';
-import Users from "./components/user/users";
+import Theme from "./components/theme/theme";
+import UserList from "./components/user/user-list";
 
 class App extends Component {
   constructor(props) {
@@ -270,6 +270,13 @@ class App extends Component {
         />);
       }
     };
+    const theme = (props) => {
+      return (<Theme
+        {...props}
+        {...commonProps}
+        onError={onError(props)}
+      />);
+    };
     const profile = (props) => {
       return (
         <ProfileForm
@@ -344,7 +351,7 @@ class App extends Component {
       />);
     };
     const users = (props) => {
-      return (<Users
+      return (<UserList
         {...props}
         {...commonProps}
         users={this.state.users}
@@ -391,6 +398,10 @@ class App extends Component {
       {
         path: '/cover',
         render: cover,
+      },
+      {
+        path: '/theme',
+        render: theme,
       },
       {
         path: '/new/collection',

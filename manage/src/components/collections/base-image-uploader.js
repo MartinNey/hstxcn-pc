@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import Alert from 'react-s-alert';
-import axios from 'axios';
+import Axios from 'axios';
 
 import RectImage from './rect-image';
 
 // TODO: will receive collection id as argument in url
-class ImageUploader extends Component {
+class BaseImageUploader extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,7 +26,7 @@ class ImageUploader extends Component {
   uploadImage(file, index) {
     const data = new FormData();
     data.append('image', file);
-    return axios({
+    return Axios({
       url: '/api/image',
       headers: {
         Authorization: this.props.auth,
@@ -68,13 +68,13 @@ class ImageUploader extends Component {
         this.finishAll(this.counts);
       }
     }
-    axios({
-      url: `/api/user/collection/${this.props.uuid}/works`,
+    Axios({
+      url: this.props.imageUploadUrl,
       headers: {
         Authorization: this.props.auth,
       },
       data: {
-        work: id
+        [this.props.dataName || 'work']: id
       },
       method: 'post'
     }).then((res) => {
@@ -126,12 +126,7 @@ class ImageUploader extends Component {
   render() {
     return (
       <div>
-        <p className="collection-upload-title">上传图片</p>
-        {
-          this.props.description
-            ? <p className="collection-upload-description">{this.props.description}</p>
-            : null
-        }
+        <p className="collection-upload-title">上传图片{this.props.description ? `*${this.props.description}` : ''}</p>
         <p className="collection-upload-image-max">还可上传图片数：{this.props.maxImages !== null
           ? this.props.maxImages
           : '无限制'}</p>
@@ -157,22 +152,23 @@ class ImageUploader extends Component {
           disabled={this.state.uploading || (this.state.files.length === 0)}
           onClick={this.onSubmit}>
           {
-              this.state.uploading ?
-                <p>正在上传...</p> :
-                <p>{this.state.files.length > 0 ? `上传${this.state.files.length}张图片` : '无图片'}</p>
+            this.state.uploading ?
+              <p>正在上传...</p> :
+              <p>{this.state.files.length > 0 ? `上传${this.state.files.length}张图片` : '无图片'}</p>
           }
         </button>
       </div>
     );
   }
 }
-ImageUploader.propTypes = {
+BaseImageUploader.propTypes = {
   auth: React.PropTypes.string,
   description: React.PropTypes.string,
   maxImages: React.PropTypes.number,
+  dataName: React.PropTypes.string,
   onUpdate: React.PropTypes.func,
   history: React.PropTypes.object,
-  uuid: React.PropTypes.string
+  imageUploadUrl: React.PropTypes.string,
 };
 
-export default ImageUploader;
+export default BaseImageUploader;

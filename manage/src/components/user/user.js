@@ -19,6 +19,7 @@ class User extends Component {
         {this.props.statusConfig[user.status].anotherText}
       </div>
       <p className="user-detail-name">姓名：{user.name}</p>
+      <p className="user-detail-number">编号：{user.number}</p>
       <p className="user-detail-description">描述：{user.description}</p>
       <p className="user-detail-email">邮箱：{user.email}</p>
       <p className="user-detail-sex">性别：{user.sex ? '男': '女'}</p>

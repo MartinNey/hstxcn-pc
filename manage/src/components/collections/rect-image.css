@@ -47,6 +47,11 @@
   display: block;
   width: 50%;
   margin: 25% auto;
+  white-space: nowrap;
+  padding: .8em;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-align: center;
 }
 .delete-button {

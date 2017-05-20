@@ -1,6 +1,5 @@
 .user-list {
-  padding-left: 2em;
-  padding-top: 1em;
+  padding: 2em;
 }
 
 .user-list li {
@@ -9,7 +8,7 @@
   padding: .5em;
   border-top: 1px solid #dddddd;
 }
-.user-list a, .user-list-info {
+.user-list a, .user-list-title {
   display: inline-block;
   width: 80%;
 }
@@ -32,16 +31,17 @@
   /*background-color: #dddddd;*/
   /*overflow: visible;*/
 /*}*/
+.user-list-number {
+  width: 10%;
+}
 .user-list-name {
   width: 20%;
 }
 .user-list-status {
   width: 20%;
-  margin-left: 2%;
 }
 .user-list-description {
-  width: 56%;
-  margin-left: 2%;
+  width: 50%;
 }
 .user-list-button {
   width: 10%;

@@ -4,7 +4,7 @@ import RectImage from './rect-image';
 import Alert from 'react-s-alert';
 import ReactModal from 'react-modal';
 import Axios from 'axios';
-import ImageUploader from './image-uploader';
+import CollectionImageUploader from './collection-image-uploader';
 // import { Link } from 'react-router-dom';
 
 class Collection extends Component {
@@ -70,7 +70,7 @@ class Collection extends Component {
           onRequestClose={this.handleCloseModal}
           contentLabel="Upload Image"
         >
-          <ImageUploader
+          <CollectionImageUploader
             onUpdate={this.props.onUpdate}
             maxImages={this.props.maxImages
               ? this.props.maxImages - this.props.profile.images.length
